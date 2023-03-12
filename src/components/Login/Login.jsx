@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Login = () => {
+const Login = (props) => {
   return (
     <Container>
       <Nav>
@@ -19,7 +19,7 @@ const Login = () => {
           <img src="/images/hero-img.svg" alt="hero" />
         </Hero>
         <Form>
-          <Google>
+          <Google onClick={() => props.signIn()}>
             <img src="/images/google.svg" alt="google" />
             Sign in with Google
           </Google>
@@ -130,7 +130,7 @@ const Hero = styled.div`
   }
 `;
 const Form = styled.div`
-  margin-top: 100px;
+  margin-top: -100px;
   width: 400px;
   @media (max-width: 768px) {
     margin-top: 20px;
@@ -161,4 +161,17 @@ const Google = styled.button`
     margin-right: 9px;
   }
 `;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: () => dispatch(signInAPI),
+  };
+};
+
 export default Login;
