@@ -1,14 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signInAPI } from "../../redux/actions";
 import { connect } from "react-redux";
 
 const Login = (props) => {
+  console.log(props.user);
+  const navigate = useNavigate();
   return (
     <Container>
+      {props.user && navigate("/home")}
       <Nav>
         <a href="/index.html">
-          <img src="/images/nav-logo.svg" alt="logo" />
+          <img src="/images/nav-logo.svg" alt="linkedin-logo" />
         </a>
         <div>
           <Join>Join now</Join>
