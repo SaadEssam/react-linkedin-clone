@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { signInAPI } from "../../redux/actions";
+import { connect } from "react-redux";
 
 const Login = (props) => {
   return (
@@ -170,8 +172,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: () => dispatch(signInAPI),
+    signIn: () => dispatch(signInAPI()),
   };
 };
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
