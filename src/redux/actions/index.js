@@ -11,3 +11,14 @@ export function signInAPI() {
       .catch((error) => alert(error.message));
   };
 }
+
+export function getUserAuth() {
+  // To Change User account which stored in Redux
+  return (dispatch) => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(actions.setUser(user));
+      }
+    });
+  };
+}
