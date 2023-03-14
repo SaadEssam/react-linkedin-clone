@@ -11,7 +11,7 @@ const Login = (props) => {
     <Container>
       {props.user && navigate("/home")}
       <Nav>
-        <a href="/index.html">
+        <a href="/">
           <img src="/images/nav-logo.svg" alt="linkedin-logo" />
         </a>
         <div>
@@ -114,7 +114,8 @@ const Hero = styled.div`
     font-weight: 600;
     color: #8f5849;
     font-weight: 200;
-    line-height: 70px @media (max-width: 768px) {
+    line-height: 70px;
+    @media (max-width: 768px) {
       text-align: center;
       font-size: 22px;
       width: 100%;
@@ -126,7 +127,7 @@ const Hero = styled.div`
     height: 670px;
     position: absolute;
     bottom: 80px;
-    right: -360px;
+    right: -195px;
     @media (max-width: 768px) {
       top: 230px;
       width: initial;

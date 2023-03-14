@@ -103,7 +103,7 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   align-items: center;
-  margin: -10px auto;
+  margin: 0px auto;
   min-height: 100%;
   max-width: 1128px;
 `;
@@ -220,7 +220,8 @@ const NavList = styled.li`
 
 const SignOut = styled(NavList)`
   position: absolute;
-  top: 60px;
+  top: 50px;
+  right: 310px;
   background: #fff;
   border-radius: 0 0 5px 5px;
   width: 100px;
