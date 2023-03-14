@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { connect, Provider } from "react-redux";
+
+import { connect } from "react-redux";
+import { getUserAuth } from "./redux/actions";
+
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
-import { getUserAuth } from "./redux/actions";
+import RequireAuth from "./components/RequireAuth";
+
 
 const App = (props) => {
   useEffect(() => {
@@ -18,10 +22,10 @@ const App = (props) => {
           <Route
             path="/home"
             element={
-              <>
+              <RequireAuth>
                 <Header />
                 <Home />
-              </>
+              </RequireAuth>
             }
           />
         </Routes>
