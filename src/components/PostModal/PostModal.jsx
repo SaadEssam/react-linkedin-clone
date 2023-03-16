@@ -8,6 +8,20 @@ const PostModal = (props) => {
   const [assetArea, setAssetArea] = useState("");
   const [shareImage, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+    if (image === "" || image === undefined) {
+      alert(`not an image, the file is a ${typeof image}`);
+      return;
+    } else {
+      setShareImage(image);
+    }
+  };
+  const switchAssetArea = (area) => {
+    setShareImage("");
+    setVideoLink("");
+    setAssetArea(area);
+  };
   const reset = (e) => {
     setEditorText("");
     setShareImage("");
@@ -63,7 +77,7 @@ const PostModal = (props) => {
                         Select an image to share
                       </label>
                     </p>
-                    {shareImage && <img src="" alt="img-post" />}
+                    {shareImage && <img src={URL.createObjectURL(shareImage)} alt="img-post" />}
                   </UploadImage>
                 ) : (
                   assetArea === "media" && (
@@ -85,10 +99,10 @@ const PostModal = (props) => {
             </ShareContent>
             <ShareCreation>
               <AttachAssets>
-                <AssetButton>
+                <AssetButton onClick={() => switchAssetArea("image")}>
                   <img src="/images/share-image.svg" alt="share-image-icon" />
                 </AssetButton>
-                <AssetButton>
+                <AssetButton onClick={() => switchAssetArea("media")}>
                   <img src="/images/share-video.svg" alt="share-video-icon" />
                 </AssetButton>
               </AttachAssets>
