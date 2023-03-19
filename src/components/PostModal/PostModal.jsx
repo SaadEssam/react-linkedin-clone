@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
+import { Timestamp } from "firebase/firestore";
+import { postArticleAPI } from "../../redux/actions";
 
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
@@ -16,6 +18,21 @@ const PostModal = (props) => {
     } else {
       setShareImage(image);
     }
+  };
+  const handlePostArticle = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    const payload = {
+      image: shareImage,
+      video: videoLink,
+      user: props.user,
+      description: editorText,
+      timestamp: Timestamp.now(),
+    };
+    props.postArticles(payload)
+    reset(e);
   };
   const switchAssetArea = (area) => {
     setShareImage("");
@@ -77,7 +94,12 @@ const PostModal = (props) => {
                         Select an image to share
                       </label>
                     </p>
-                    {shareImage && <img src={URL.createObjectURL(shareImage)} alt="img-post" />}
+                    {shareImage && (
+                      <img
+                        src={URL.createObjectURL(shareImage)}
+                        alt="img-post"
+                      />
+                    )}
                   </UploadImage>
                 ) : (
                   assetArea === "media" && (
@@ -115,7 +137,10 @@ const PostModal = (props) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={!editorText ? true : false}>
+              <PostButton
+                onClick={(e) => handlePostArticle(e)}
+                disabled={!editorText ? true : false}
+              >
                 Post
               </PostButton>
             </ShareCreation>
@@ -299,5 +324,10 @@ const mapStateToProps = (state) => {
     user: state.userState.user,
   };
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postArticles: (payload) => dispatch(postArticleAPI(payload)),
+  };
+};
 
-export default connect(mapStateToProps)(PostModal);
+export default connect(mapStateToProps, mapDispatchToProps)(PostModal);

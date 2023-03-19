@@ -7,7 +7,7 @@ export const setUser = (payload) => {
   };
 };
 
-export const setLoading = (state) => ({
+export const setLoading = (status) => ({
   type: actions.SET_LOADING_STATUS,
   status: status,
 });
