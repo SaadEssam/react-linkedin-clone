@@ -71,6 +71,36 @@ export function postArticleAPI(payload) {
         }
       );
       dispatch(actions.setLoading(false));
+    } else if (payload.video) {
+      const collRef = collection(db, "articles");
+      addDoc(collRef, {
+        actor: {
+          description: payload.user.email,
+          title: payload.user.displayName,
+          date: payload.timestamp,
+          image: payload.user.photoURL,
+        },
+        comments: 0,
+        video: payload.video,
+        description: payload.description,
+        shareImg: payload.image,
+      });
+      dispatch(actions.setLoading(false));
+    } else {
+      const collRef = collection(db, "articles");
+      addDoc(collRef, {
+        actor: {
+          description: payload.user.email,
+          title: payload.user.displayName,
+          date: payload.timestamp,
+          image: payload.user.photoURL,
+        },
+        comments: 0,
+        video: payload.video,
+        description: payload.description,
+        shareImg: payload.image,
+      });
+      dispatch(actions.setLoading(false));
     }
   };
 }
