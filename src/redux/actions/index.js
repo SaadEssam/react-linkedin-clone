@@ -53,7 +53,6 @@ export function postArticleAPI(payload) {
         (snapshot) => {
           const progress =
             Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done.");
         },
         (error) => {
           alert(error);

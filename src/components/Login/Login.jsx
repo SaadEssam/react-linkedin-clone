@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { signInAPI } from "../../redux/actions";
 import { connect } from "react-redux";
 
 const Login = (props) => {
-  console.log(props.user);
   const navigate = useNavigate();
+  useEffect(() => {
+    props.user && navigate("/home");
+  }, [props.user]);
   return (
     <Container>
-      {props.user && navigate("/home")}
       <Nav>
         <a href="/">
           <img src="/images/nav-logo.svg" alt="linkedin-logo" />
