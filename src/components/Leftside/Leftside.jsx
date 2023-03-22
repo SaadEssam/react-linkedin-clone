@@ -47,7 +47,7 @@ const Leftside = (props) => {
         <a>
           <span>
             Events
-            <img src="/images/event-icon.svg" alt="event-icon" />
+            <img src="/images/plus-icon.svg" alt="plus-icon" />
           </span>
         </a>
         <a>
