@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { getArticlesAPI } from "../../redux/actions";
 import PostModal from "../PostModal/PostModal";
 
 const Main = (props) => {
@@ -9,6 +10,9 @@ const Main = (props) => {
   const handleClick = () => {
     setShowModal(!showModal);
   };
+  useEffect(() => {
+    props.getArticles();
+  }, []);
   return (
     <Container>
       <ShareBox>
@@ -56,7 +60,7 @@ const Main = (props) => {
                       <span>{article.actor.title}</span>
                       <span>{article.actor.description}</span>
                       <span>
-                        {article.actor.date.toDate().toLocalDateString()}
+                        {article.actor.date.toDate().toLocaleDateString()}
                       </span>
                     </div>
                   </a>
@@ -65,7 +69,7 @@ const Main = (props) => {
                   </button>
                 </SharedActor>
                 <Description>{article.description}</Description>
-                <ShareImg>
+                <SharedImg>
                   <a>
                     {!article.shareImg && article.video ? (
                       <ReactPlayer width="100%" url={article.video} />
@@ -73,7 +77,7 @@ const Main = (props) => {
                       article.shareImg && <img src={article.shareImg} />
                     )}
                   </a>
-                </ShareImg>
+                </SharedImg>
                 <SocialCounts>
                   <li>
                     <button>
@@ -341,4 +345,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getArticles: () => dispatch(getArticlesAPI()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
